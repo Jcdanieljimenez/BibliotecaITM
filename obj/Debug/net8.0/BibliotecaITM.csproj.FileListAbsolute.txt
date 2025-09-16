@@ -12,3 +12,4 @@ C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\obj\Debug\net8
 C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\obj\Debug\net8.0\BibliotecaITM.pdb
 C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\obj\Debug\net8.0\BibliotecaITM.genruntimeconfig.cache
 C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\obj\Debug\net8.0\ref\BibliotecaITM.dll
+C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\obj\Debug\net8.0\BibliotecaITM.sourcelink.json
