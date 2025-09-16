@@ -1,0 +1,15 @@
+C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\bin\Debug\net8.0\BibliotecaITM.exe
+C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\bin\Debug\net8.0\BibliotecaITM.deps.json
+C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\bin\Debug\net8.0\BibliotecaITM.runtimeconfig.json
+C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\bin\Debug\net8.0\BibliotecaITM.dll
+C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\bin\Debug\net8.0\BibliotecaITM.pdb
+C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\obj\Debug\net8.0\BibliotecaITM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\obj\Debug\net8.0\BibliotecaITM.AssemblyInfoInputs.cache
+C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\obj\Debug\net8.0\BibliotecaITM.AssemblyInfo.cs
+C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\obj\Debug\net8.0\BibliotecaITM.csproj.CoreCompileInputs.cache
+C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\obj\Debug\net8.0\BibliotecaITM.dll
+C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\obj\Debug\net8.0\refint\BibliotecaITM.dll
+C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\obj\Debug\net8.0\BibliotecaITM.pdb
+C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\obj\Debug\net8.0\BibliotecaITM.genruntimeconfig.cache
+C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\obj\Debug\net8.0\ref\BibliotecaITM.dll
+C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\obj\Debug\net8.0\BibliotecaITM.sourcelink.json
