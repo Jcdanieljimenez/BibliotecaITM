@@ -1,6 +1,16 @@
 # BibliotecaITM
 Biblioteca POO con enfoques en prestamos y devoluciones 
 
+Integrantes
+
+ Nombre: Daniel Jimenez Correa
+ Correo: danieljimenez208573@correo.itm.edu.co
+
+ Nombre: Daniel Jaramillo Rivera
+ Correo: danieljaramillo263299@correo.itm.edu.co
+
+---------------------------------------------------------------------------------------------------------
+
 **Problema:**
 La biblioteca estudiantil ITM gestiona sus libros y préstamos de forma manual (libros de registro en papel y hojas Excel). Esto causa errores frecuentes: libros mal localizados, control deficiente de copias prestadas y vencidas, retrasos en la devolución, poca trazabilidad de usuarios, y dificultad para conocer la disponibilidad en tiempo real. Además no hay un registro claro de reservas ni de sanciones por retrasos.
 
