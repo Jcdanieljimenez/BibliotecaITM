@@ -1,6 +1,7 @@
 ﻿using BibliotecaITM.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace BibliotecaITM.Domain
             var encargados = new List<Encargado>
             {
                 new Encargado("1036668706", "Daniel Jimenez Correa", "danieljimenez208573@correo.itm.edu.co", "Administrador"),
-                new Encargado("1111111", "Daniel Jaramillo Rivera", "danieljaramillo263299@correo.itm.edu.co", "Bibliotecario")
+                new Encargado("1020417253", "Daniel Jaramillo Rivera", "danieljaramillo263299@correo.itm.edu.co", "Bibliotecario")
             };
 
         
@@ -45,13 +46,9 @@ namespace BibliotecaITM.Domain
 
             // --- Libros disponibles ---
 
-            //Creamos una lista de libros iniciales
-            var libros = new List<Libro>
-            {
-                new Libro("978-1234567890", "Un mundo feliz", "Aldous Huxley", 1932, CategoriaLibro.Academico, 3),
-                new Libro("978-9876543210", "Fahrenheit 451", "Ray Bradbury", 1953, CategoriaLibro.Poemas, 2),
-                new Libro("978-1111111111", "Nosotros", "Yevgeny Zamyatin", 1924, CategoriaLibro.Matematicas, 1)
-            };
+            // --- Cargar libros desde archivo TXT ---
+            string rutaArchivo = @"C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\Data\libros.txt";
+            var libros = CargarLibrosDesdeArchivo(rutaArchivo);
 
             // --- Crear lista de prestamos  ---
 
@@ -170,7 +167,7 @@ namespace BibliotecaITM.Domain
                     case "6":
                         if (socios.Count == 0)
                         {
-                            Console.WriteLine("⚠ No hay socios registrados.");
+                            Console.WriteLine("Alerta, no hay socios registrados.");
                             break;
                         }
 
@@ -196,6 +193,50 @@ namespace BibliotecaITM.Domain
             }
 
             Console.WriteLine("\nGracias por usar la Biblioteca ITM");
+        }
+        // --- Método para cargar libros desde TXT ---
+        private static List<Libro> CargarLibrosDesdeArchivo(string rutaArchivo)
+        {
+            var libros = new List<Libro>();
+
+            if (!File.Exists(rutaArchivo))
+            {
+                Console.WriteLine($"Alerta. No se encontró el archivo {rutaArchivo}");
+                return libros;
+            }
+
+            var lineas = File.ReadAllLines(rutaArchivo);
+            foreach (var linea in lineas)
+            {
+                if (string.IsNullOrWhiteSpace(linea))
+                    continue; //Saltar líneas vacías
+
+                try
+                {
+                    var datos = linea.Split(',');
+                    if (datos.Length < 7) //Validar que haya suficientes columnas
+                    {
+                        Console.WriteLine($"Línea inválida: '{linea}'");
+                        continue;
+                    }
+
+                    string isbn = datos[0];
+                    string titulo = datos[1];
+                    string autor = datos[2];
+                    int anio = int.Parse(datos[3]);
+                    CategoriaLibro categoria = Enum.Parse<CategoriaLibro>(datos[4]);
+                    TipoLibro tipo = Enum.Parse<TipoLibro>(datos[5]);
+                    int stock = int.Parse(datos[6]);
+
+                    libros.Add(new Libro(isbn, titulo, autor, anio, categoria, tipo, stock));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al leer línea '{linea}': {ex.Message}");
+                }
+            }
+
+            return libros;
         }
     }
 }

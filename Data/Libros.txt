@@ -1,0 +1,7 @@
+978-1234567890,Un mundo feliz,Aldous Huxley,1932,Academico,Fisico,3
+978-0987654321,Fahrenheit 451,Ray Bradbury,1953,Novela,Fisico,2
+978-1111111111,Nosotros,Yevgeny Zamyatin,1924,Novela,Fisico,1
+978-5556612345,Cien años de soledad,García Márquez,1967,Novela,Fisico,3
+978-5556654321,Matemáticas básicas,Anonimo,2020,Matematicas,Digital,0
+978-5552134234,Libro prueba,Daniel Jimenez,2025,Matematicas,Fisico,3
+
