@@ -34,28 +34,28 @@ namespace BibliotecaITM.Domain
             var encargadoActivo = encargados[opcionEncargado - 1];
             Console.WriteLine($"\nEncargado seleccionado: {encargadoActivo}\n");
 
-            // --- Crear lista de socios ---
+            // --- llamar Socios.txt desde la clase ArchivosLS ---
+            var socios = ArchivosLS.CargarSocios();
 
-            //Creamos una lista de socios iniciales
-            var socios = new List<Socio>()
+
+            // --- llamar libros.txt desde la clase ArchivosLS ---
+            var libros = ArchivosLS.CargarLibros();
+
+            //Validar que los txt donde se encuentran los socios y libros no esten vacios o la ruta sea incorrecta
+
+            if (socios.Count == 0 || libros.Count == 0)
             {
-                new Socio("1001112325", "Juan Pérez", "juanperez@mail.com"),
-                new Socio("100223352", "Ana Gómez", "anagomez@mail.com"),
-                new Socio("100344445", "Luis Torres", "luistorres@mail.com")
-            };
+                Console.WriteLine("Advertencia, No hay socios o libros cargados. Verifica los archivos TXT.");
+                return;
+            }
 
-            // --- Libros disponibles ---
-
-            // --- Cargar libros desde archivo TXT ---
-            string rutaArchivo = @"C:\Users\Felipe barahona\source\repos\BibliotecaITM\BibliotecaITM\Data\libros.txt";
-            var libros = CargarLibrosDesdeArchivo(rutaArchivo);
 
             // --- Crear lista de prestamos  ---
 
             //Creamos una lista de prestamos iniciales
             var prestamos = new List<Prestamo>()
             {
-                new Prestamo(socios[0], libros[0]),
+                new Prestamo(socios[0], libros[1]), // ejemplo de que el Socio en la posición 0 presta el libro en la posición 1, desde consola, en este caso el usuario 1001112325,Juan Pérez prestó "Fahrenheit 451"
 
             };
 
@@ -66,20 +66,34 @@ namespace BibliotecaITM.Domain
             bool salir = false;
             while (!salir)
             {
-                Console.WriteLine("\nMenú principal:");
-                Console.WriteLine("1. Registrar socio");
-                Console.WriteLine("2. Mostrar Socios");
-                Console.WriteLine("3. Mostrar libros disponibles");
-                Console.WriteLine("4. Registrar préstamo");
-                Console.WriteLine("5. Registrar devolución");
-                Console.WriteLine("6. Pagar multa");
-                Console.WriteLine("7. Salir");
+                Console.WriteLine("\nMenú principal:");                
+                Console.WriteLine("1. Mostrar Socios");
+                Console.WriteLine("2. Mostrar libros disponibles");
+                Console.WriteLine("3. Registrar socio");
+                Console.WriteLine("4. Registrar libro");
+                Console.WriteLine("5. Registrar préstamo");
+                Console.WriteLine("6. Registrar devolución");
+                Console.WriteLine("7. Pagar multa");
+                Console.WriteLine("8. Salir");
                 Console.Write("Seleccione una opción: ");
                 string opcion = Console.ReadLine();
 
                 switch (opcion)
-                {
+                {                  
+
                     case "1":
+                        Console.WriteLine("\nSocios registrados");
+                        foreach (var socio in socios)
+                            Console.WriteLine(socio);
+                        break;
+
+                    case "2":
+                        Console.WriteLine("\nLibros en la biblioteca:");
+                        foreach (var libro in libros)
+                            Console.WriteLine(libro);
+                        break;
+
+                    case "3":
                         Console.Write("Documento: ");
                         string doc = Console.ReadLine() ?? "";
                         Console.Write("Nombre: ");
@@ -91,6 +105,7 @@ namespace BibliotecaITM.Domain
                         {
                             var socio = new Socio(doc, nom, email);
                             socios.Add(socio);
+                            ArchivosLS.GuardarSocio(socio); // lo guarda en Socios.txt
                             Console.WriteLine($"Socio registrado con exito: {socio}");
                         }
                         catch (Exception ex)
@@ -99,19 +114,48 @@ namespace BibliotecaITM.Domain
                         }
                         break;
 
-                    case "2":
-                        Console.WriteLine("\nSocios registrados");
-                        foreach (var socio in socios)
-                            Console.WriteLine(socio);
-                        break;
-
-                    case "3":
-                        Console.WriteLine("\nLibros en la biblioteca:");
-                        foreach (var libro in libros)
-                            Console.WriteLine(libro);
-                        break;
-
                     case "4":
+                        Console.Write("ISBN: ");
+                        string isbn = Console.ReadLine() ?? "";
+
+                        Console.Write("Título: ");
+                        string titulo = Console.ReadLine() ?? "";
+
+                        Console.Write("Autor: ");
+                        string autor = Console.ReadLine() ?? "";
+
+                        Console.Write("Año de publicación: ");
+                        int anio = int.Parse(Console.ReadLine() ?? "0");
+
+                        Console.WriteLine("Categoría (0=Academico, 1=Poemas, 2=Matematicas, 3=Historia, 4=Novela, 5=Infantil):");
+                        int catIdx = int.Parse(Console.ReadLine() ?? "0");
+                        var categoria = (CategoriaLibro)catIdx;
+
+                        Console.WriteLine("Tipo de libro (0=Fisico, 1=Digital):");
+                        int tipoIdx = int.Parse(Console.ReadLine() ?? "0");
+                        var tipo = (TipoLibro)tipoIdx;
+
+                        int copias = 1;
+                        if (tipo == TipoLibro.Fisico)
+                        {
+                            Console.Write("Número de copias: ");
+                            copias = int.Parse(Console.ReadLine() ?? "1");
+                        }
+
+                        try
+                        {
+                            var libro = new Libro(isbn, titulo, autor, anio, categoria, tipo, copias);
+                            libros.Add(libro);
+                            ArchivosLS.GuardarLibro(libro); // 🔹 Guarda en libros.txt
+                            Console.WriteLine($"Libro registrado con éxito: {libro}");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Error al registrar libro: {ex.Message}");
+                        }
+                        break;
+
+                    case "5":
                         if (socios.Count == 0)
                         {
                             Console.WriteLine("Alerta, no hay socios registrados.");
@@ -146,7 +190,7 @@ namespace BibliotecaITM.Domain
                         }
                         break;
 
-                    case "5":
+                    case "6":
                         if (prestamos.Count == 0)
                         {
                             Console.WriteLine("No hay préstamos registrados.");
@@ -164,7 +208,7 @@ namespace BibliotecaITM.Domain
                         Console.WriteLine(resultadoDev.Message);
                         break;
 
-                    case "6":
+                    case "7":
                         if (socios.Count == 0)
                         {
                             Console.WriteLine("Alerta, no hay socios registrados.");
@@ -182,7 +226,7 @@ namespace BibliotecaITM.Domain
                         Console.WriteLine(resultadoPago.Message);
                         break;
 
-                    case "7":
+                    case "8":
                         salir = true;
                         break;
 
@@ -194,49 +238,6 @@ namespace BibliotecaITM.Domain
 
             Console.WriteLine("\nGracias por usar la Biblioteca ITM");
         }
-        // --- Método para cargar libros desde TXT ---
-        private static List<Libro> CargarLibrosDesdeArchivo(string rutaArchivo)
-        {
-            var libros = new List<Libro>();
 
-            if (!File.Exists(rutaArchivo))
-            {
-                Console.WriteLine($"Alerta. No se encontró el archivo {rutaArchivo}");
-                return libros;
-            }
-
-            var lineas = File.ReadAllLines(rutaArchivo);
-            foreach (var linea in lineas)
-            {
-                if (string.IsNullOrWhiteSpace(linea))
-                    continue; //Saltar líneas vacías
-
-                try
-                {
-                    var datos = linea.Split(',');
-                    if (datos.Length < 7) //Validar que haya suficientes columnas
-                    {
-                        Console.WriteLine($"Línea inválida: '{linea}'");
-                        continue;
-                    }
-
-                    string isbn = datos[0];
-                    string titulo = datos[1];
-                    string autor = datos[2];
-                    int anio = int.Parse(datos[3]);
-                    CategoriaLibro categoria = Enum.Parse<CategoriaLibro>(datos[4]);
-                    TipoLibro tipo = Enum.Parse<TipoLibro>(datos[5]);
-                    int stock = int.Parse(datos[6]);
-
-                    libros.Add(new Libro(isbn, titulo, autor, anio, categoria, tipo, stock));
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error al leer línea '{linea}': {ex.Message}");
-                }
-            }
-
-            return libros;
-        }
     }
 }

@@ -4,4 +4,6 @@
 978-5556612345,Cien años de soledad,García Márquez,1967,Novela,Fisico,3
 978-5556654321,Matemáticas básicas,Anonimo,2020,Matematicas,Digital,0
 978-5552134234,Libro prueba,Daniel Jimenez,2025,Matematicas,Fisico,3
-
+999856325-nhk,Los tiempos amargos,Desconocido,2025,Poemas,Digital,2147483647,
+998855952-nhj,los miedos del miedo,Daniel Ortega,2012,Historia,Fisico,5,
+9898787952-hnk,Probrando la pizza,antonio casas,2015,Historia,Fisico,3,

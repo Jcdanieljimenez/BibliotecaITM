@@ -39,7 +39,7 @@ namespace BibliotecaITM.Domain
         public int CopiasDisponibles { get; private set; }
 
         // Constructor
-        public Libro(string isbn, string titulo, string autor, int anio, CategoriaLibro categoria, TipoLibro tipo, int totalCopias = 1)
+        public Libro(string isbn, string titulo, string autor, int anio, CategoriaLibro categoria, TipoLibro tipo, int totalCopias)
         {
             if (string.IsNullOrWhiteSpace(isbn))
                 throw new ArgumentException("El ISBN no puede estar vacío.");
